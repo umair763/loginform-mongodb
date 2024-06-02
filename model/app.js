@@ -1,9 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const User = require('./user');
-const db = require('./db');
+const connectDB = require('./db');
 
 const app = express();
+
+
+
+connectDB();
+
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));

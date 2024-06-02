@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Login Form</title>
+</head> 
+<body> 
+    <div class="login-container">
+        <h1>Login to Learn MongoDB</h1>
+        <!-- Removed action="/register" because we are handling form submission via JavaScript -->
+        <form id="login-form">
+            <!-- Added name attributes for better form data serialization -->
+            <input type="text" id="firstname" name="firstname" placeholder="First Name" required />
+            <input type="text" id="lastname" name="lastname" placeholder="Last Name" required />
+            <input type="password" id="password" name="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+        <div id="validation-message" class="validation-message" style="display: none;">Saving Credentials To Database...</div>
+    </div>
 
-        <title>Login Form</title>
-    </head> 
-    <body> 
-        <div class="login-container">
-            <h1>Login to Learn MongoDB</h1>
-            <form id="login-form" action="/register" method="POST">
-                <input type="text" id="firstname" placeholder="First Name" required />
-                <input type="text" id="lastname" placeholder="Last Name" required />
-                <input type="password" id="password" placeholder="Password" required />
-                <button type="submit">Login</button>
-            </form>
-            <div id="validation-message" class="validation-message">Saving Credentials To Database...</div>
-        </div>
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const validationMessage = document.getElementById('validation-message');
 
-        <script>
-            const loginForm = document.getElementById('login-form');
-            const validationMessage = document.getElementById('validation-message');
+        loginForm.addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent default form submission
 
-            loginForm.addEventListener('submit', function (event) {
-                event.preventDefault();
+            // Show validation message
+            validationMessage.style.display = 'block';
+            validationMessage.textContent = 'Saving Credentials To Database...';
+            validationMessage.style.color = 'black';
 
-                // Show validation message
-                validationMessage.style.display = 'block';
+            // Gather form data
+            const formData = {
+                firstname: document.getElementById('firstname').value, // Collect first name
+                lastname: document.getElementById('lastname').value,   // Collect last name
+                password: document.getElementById('password').value,   // Collect password
+            };
 
-                // Simulate credential validation
-                setTimeout(() => {
-                    validationMessage.textContent = 'Credentials Saved To Mongodb successfully!';
-                    validationMessage.style.color = 'rgb(0, 93, 223)'; // Green color for success
-                }, 2000);
-            });
-        </script>
-    </body>
+            // Send form data to server
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST', // Use POST method
+                    headers: {
+                        'Content-Type': 'application/json', // Set content type to JSON
+                    },
+                    body: JSON.stringify(formData), // Convert form data to JSON
+                });
+
+                if (response.ok) {
+                    validationMessage.textContent = 'Credentials Saved To MongoDB Successfully!';
+                    validationMessage.style.color = 'rgb(0, 93, 223)'; // Blue color for success
+                } else {
+                    validationMessage.textContent = 'Error saving credentials to database';
+                    validationMessage.style.color = 'red'; // Red color for error
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                validationMessage.textContent = 'Error saving credentials to database';
+                validationMessage.style.color = 'red'; // Red color for error
+            }
+        });
+    </script>
+</body>
 </html>
