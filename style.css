@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #53cbfb;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.login-container {
+    background-color: #03b0b0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.372);
+    text-align: center;
+}
+.login-container h1 {
+    color: #fff;
+}
+.login-container input[type='text'],
+.login-container input[type='password'] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.login-container:active,
+.login-container:active {
+    outline: none;
+	border: none;
+}
+.login-container button {
+    width: 80%;
+    padding: 10px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.login-container button:hover {
+    background-color: #006d5b; /* Even darker cyan */
+}
+.validation-message {
+    margin-top: 20px;
+    color: rgb(0, 93, 223); /* Red color for validation */
+    display: none;
+}
+/* use("loginform");
+
+db.getCollection('logins').insertMany([
+    { firstname: 'Muhammad Umair', lastname: 'Khan', ' password': '123' },
+    { firstname: 'Faizan', lastname: 'Jawad', ' password': '123' },
+    { firstname: 'Atif', lastname: 'Rafique', ' password': '123' },
+]); */

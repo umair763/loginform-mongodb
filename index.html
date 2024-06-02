@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+
+        <title>Login Form</title>
+    </head> 
+    <body> 
+        <div class="login-container">
+            <h1>Login to Learn MongoDB</h1>
+            <form id="login-form" action="/register" method="POST">
+                <input type="text" id="firstname" placeholder="First Name" required />
+                <input type="text" id="lastname" placeholder="Last Name" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+            </form>
+            <div id="validation-message" class="validation-message">Saving Credentials To Database...</div>
+        </div>
+
+        <script>
+            const loginForm = document.getElementById('login-form');
+            const validationMessage = document.getElementById('validation-message');
+
+            loginForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Show validation message
+                validationMessage.style.display = 'block';
+
+                // Simulate credential validation
+                setTimeout(() => {
+                    validationMessage.textContent = 'Credentials Saved To Mongodb successfully!';
+                    validationMessage.style.color = 'rgb(0, 93, 223)'; // Green color for success
+                }, 2000);
+            });
+        </script>
+    </body>
+</html>
